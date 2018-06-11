@@ -7,7 +7,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
-class Api {
+object Api {
 
     private val apiService by lazy {
         Retrofit.Builder().baseUrl("https://api.github.com/")
@@ -16,6 +16,8 @@ class Api {
             .build()
             .create(ApiService::class.java)
     }
+
+    fun getPRs() = apiService.getPRs()
 
     interface ApiService {
         @GET("repos/instacart/Snacks/pulls?state=open")
