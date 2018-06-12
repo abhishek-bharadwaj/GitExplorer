@@ -9,7 +9,8 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:elevation="@dimen/grid_1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/grid_1"
+                android:layout_marginStart="@dimen/grid_1"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
