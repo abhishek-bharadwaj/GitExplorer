@@ -3,6 +3,7 @@ package com.example.abhishek.gitexplorer.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.abhishek.gitexplorer.R
 import com.example.abhishek.gitexplorer.data.DataCallBacks
 import com.example.abhishek.gitexplorer.data.PRData
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(), DataCallBacks {
         rv.visible()
         val repo = prData[0].head.repo
         tv_repo_name.text = repo.name
+        Glide.with(this).load(repo.owner.avatarUrl).into(iv_repo_icon)
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = PRDataAdapter(this, prData)
     }

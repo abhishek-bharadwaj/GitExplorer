@@ -22,7 +22,8 @@ class PRDataAdapter(private val context: Context, private val prData: List<PRDat
 
     override fun onBindViewHolder(holder: PRDataVH, position: Int) {
         val prItem = prData[position]
-        holder.itemView.tv_pr_title.text = prItem.title
+        holder.itemView.tv_pr_title.text =
+                context.getString(R.string.pr_title, prItem.prNumber, prItem.title)
     }
 
     inner class PRDataVH(view: View) : RecyclerView.ViewHolder(view)
