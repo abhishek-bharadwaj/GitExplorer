@@ -4,4 +4,8 @@
     <string name="pr_title">%1$d - %2$s</string>
     <string name="last_updated_at">Last updated on : %1$s</string>
     <string name="filter">Filter</string>
+    <string name="showing_pull_requests">Showing %1$s pull requests</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+    <string name="all">All</string>
 </resources>

@@ -12,23 +12,31 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.abhishek.gitexplorer.R
 import com.example.abhishek.gitexplorer.Util
 import com.example.abhishek.gitexplorer.data.PRData
+import com.example.abhishek.gitexplorer.data.State
 import kotlinx.android.synthetic.main.layout_pr_data_item.view.*
 
 
 class PRDataAdapter(private val context: Context, private val prData: List<PRData>) :
     RecyclerView.Adapter<PRDataAdapter.PRDataVH>() {
 
-    private val inflater = LayoutInflater.from(context)
     private val circleTransform = RequestOptions.circleCropTransform()
+    private val inflater = LayoutInflater.from(context)
+    private var state: String = State.ALL
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PRDataVH {
         return PRDataVH(inflater.inflate(R.layout.layout_pr_data_item, parent, false))
     }
 
-    override fun getItemCount() = prData.size
+    override fun getItemCount(): Int {
+        return if (state == State.ALL)
+            prData.size
+        else
+            prData.filter { state == it.state }.size
+    }
 
     override fun onBindViewHolder(holder: PRDataVH, position: Int) {
         val prItem = prData[position]
+        if (state != State.ALL && prItem.state != state) return
         val itemView = holder.itemView
         val prTitle = context.getString(R.string.pr_title, prItem.prNumber, prItem.title)
         itemView.tv_pr_title.text = prTitle
@@ -40,6 +48,11 @@ class PRDataAdapter(private val context: Context, private val prData: List<PRDat
         itemView.tv_user_name.text = user.login
         Glide.with(context).load(user.avatarUrl).apply(circleTransform)
             .into(itemView.iv_user_avatar)
+    }
+
+    fun applyFilter(state: String) {
+        this.state = state
+        notifyDataSetChanged()
     }
 
     inner class PRDataVH(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
