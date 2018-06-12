@@ -11,9 +11,9 @@ object Repository {
 
     fun getData() {
         Api.getPRs().compose(Util.applyIOSchedulers())
-            .subscribe(object : SingleObserver<PRData> {
-                override fun onSuccess(t: PRData) {
-                    Log.d(TAG, t.title)
+            .subscribe(object : SingleObserver<List<PRData>> {
+                override fun onSuccess(t: List<PRData>) {
+                    Log.d(TAG, t[0].title)
                 }
 
                 override fun onSubscribe(d: Disposable) {

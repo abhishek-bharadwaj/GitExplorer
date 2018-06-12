@@ -21,6 +21,6 @@ object Api {
 
     interface ApiService {
         @GET("repos/instacart/Snacks/pulls?state=open")
-        fun getPRs(): Single<PRData>
+        fun getPRs(): Single<List<PRData>>
     }
 }
