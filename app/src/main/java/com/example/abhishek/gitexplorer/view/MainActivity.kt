@@ -24,14 +24,18 @@ class MainActivity : AppCompatActivity(), DataCallBacks {
     override fun onSuccess(prData: List<PRData>) {
         ll_progress_container.gone()
         rv.visible()
+        setUpUI(prData)
+    }
+
+    override fun onFailure(e: Throwable) {
+        ll_progress_container.gone()
+    }
+
+    private fun setUpUI(prData: List<PRData>) {
         val repo = prData[0].head.repo
         tv_repo_name.text = repo.name
         Glide.with(this).load(repo.owner.avatarUrl).into(iv_repo_icon)
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = PRDataAdapter(this, prData)
-    }
-
-    override fun onFailure(e: Throwable) {
-        ll_progress_container.gone()
     }
 }
