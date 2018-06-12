@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
         ll_progress_container.gone()
         rv.visible()
         setUpUI(prData)
-        getString(R.string.showing_pull_requests, State.ALL)
+        tv_label.text = getString(R.string.showing_pull_requests, State.ALL)
     }
 
     override fun onFailure(e: Throwable) {
