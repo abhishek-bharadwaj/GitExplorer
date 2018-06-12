@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.abhishek.gitexplorer.R
+import com.example.abhishek.gitexplorer.Util
 import com.example.abhishek.gitexplorer.data.PRData
 import kotlinx.android.synthetic.main.layout_pr_data_item.view.*
 
@@ -31,6 +32,8 @@ class PRDataAdapter(private val context: Context, private val prData: List<PRDat
         val itemView = holder.itemView
         val prTitle = context.getString(R.string.pr_title, prItem.prNumber, prItem.title)
         itemView.tv_pr_title.text = prTitle
+        val lastUpdated = Util.getDateDisplayString(prItem.updatedAt)
+        itemView.tv_last_updated_at.text = context.getString(R.string.last_updated_at, lastUpdated)
         itemView.tag = prItem.htmlUrl
 
         val user = prItem.user
