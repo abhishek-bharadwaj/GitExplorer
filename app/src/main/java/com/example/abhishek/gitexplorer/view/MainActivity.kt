@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
 
-    private var adapter: PRDataAdapter? = null
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
+    private var adapter: PRDataAdapter? = null
     private var prData: List<PRData>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-        ll_progress_container.visible()
         bottomSheetBehaviour = BottomSheetBehavior.from<LinearLayout>(ll_filters)
         bottomSheetBehaviour.peekHeight = resources.getDimensionPixelSize(R.dimen.button_height)
 
@@ -34,21 +33,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
         tv_all.setOnClickListener(this)
         tv_open.setOnClickListener(this)
         tv_close.setOnClickListener(this)
+        btn_try_again.setOnClickListener(this)
 
-        Repository.getData(this)
+        requestData()
     }
 
     override fun onSuccess(prData: List<PRData>) {
-        this.prData = prData
         ll_progress_container.gone()
+        ll_error.gone()
         rv.visible()
+        this.prData = prData
         setUpUI(prData)
         ll_filters.visible()
         tv_label.text = getString(R.string.showing_pull_requests, State.ALL)
     }
 
     override fun onFailure(e: Throwable) {
-        ll_progress_container.gone()
         showErrorUI()
     }
 
@@ -76,7 +76,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
             iv_back -> {
                 finish()
             }
+            btn_try_again -> {
+                requestData()
+            }
         }
+    }
+
+    private fun requestData() {
+        ll_progress_container.visible()
+        rv.gone()
+        ll_error.gone()
+        Repository.getData(this)
     }
 
     private fun setUpUI(prData: List<PRData>) {
@@ -89,6 +99,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
     }
 
     private fun showErrorUI() {
-
+        ll_progress_container.gone()
+        rv.gone()
+        ll_error.visible()
     }
 }
