@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity(), DataCallBacks {
     override fun onSuccess(prData: List<PRData>) {
         ll_progress_container.gone()
         rv.visible()
+        val repo = prData[0].head.repo
+        tv_repo_name.text = repo.name
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = PRDataAdapter(this, prData)
     }

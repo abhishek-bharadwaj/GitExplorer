@@ -8,7 +8,11 @@ class PRData(@SerializedName("url") val url: String,
              @SerializedName("number") val prNumber: Int,
              @SerializedName("title") val title: String,
              @SerializedName("state") val state: String,
-             @SerializedName("user") val user: User)
+             @SerializedName("user") val user: User,
+             @SerializedName("head") val head: Head)
+
+class Head(@SerializedName("user") val user: User,
+           @SerializedName("repo") val repo: Repo)
 
 class User(@SerializedName("login") val login: String,
            @SerializedName("id") val id: Long,
@@ -16,8 +20,7 @@ class User(@SerializedName("login") val login: String,
            @SerializedName("html_url") val profileUrl: String,
            @SerializedName("body") val body: String,
            @SerializedName("created_at") val createdAt: String,
-           @SerializedName("updated_at") val updatedAt: String,
-           @SerializedName("repo") val repo: Repo)
+           @SerializedName("updated_at") val updatedAt: String)
 
 class Repo(@SerializedName("id") val id: Long,
            @SerializedName("name") val name: String,
