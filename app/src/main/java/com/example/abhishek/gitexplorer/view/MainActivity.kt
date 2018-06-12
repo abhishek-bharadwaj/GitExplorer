@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
         bottomSheetBehaviour = BottomSheetBehavior.from<LinearLayout>(ll_filters)
         bottomSheetBehaviour.peekHeight = resources.getDimensionPixelSize(R.dimen.button_height)
 
+        iv_back.setOnClickListener(this)
         tv_label.setOnClickListener(this)
         tv_all.setOnClickListener(this)
         tv_open.setOnClickListener(this)
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
         ll_progress_container.gone()
         rv.visible()
         setUpUI(prData)
+        ll_filters.visible()
         tv_label.text = getString(R.string.showing_pull_requests, State.ALL)
     }
 
@@ -70,6 +72,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
                 adapter?.applyFilter(State.CLOSED)
                 tv_label.text = getString(R.string.showing_pull_requests, State.CLOSED)
                 bottomSheetBehaviour.close()
+            }
+            iv_back -> {
+                finish()
             }
         }
     }

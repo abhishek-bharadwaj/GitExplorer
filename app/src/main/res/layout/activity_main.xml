@@ -26,6 +26,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?selectableItemBackground"
+                    android:padding="@dimen/grid_1"
+                    android:src="@drawable/ic_arrow_back_24dp" />
+
+                <ImageView
                     android:id="@+id/iv_repo_icon"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -77,6 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
         <TextView
