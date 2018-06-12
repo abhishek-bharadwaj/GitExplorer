@@ -9,11 +9,11 @@ object Repository {
 
     const val TAG = "Repository"
 
-    fun getData() {
+    fun getData(callBacks: DataCallBacks) {
         Api.getPRs().compose(Util.applyIOSchedulers())
             .subscribe(object : SingleObserver<List<PRData>> {
                 override fun onSuccess(t: List<PRData>) {
-                    Log.d(TAG, t[0].title)
+                    callBacks.onSuccess(prData = t)
                 }
 
                 override fun onSubscribe(d: Disposable) {
@@ -21,7 +21,7 @@ object Repository {
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.e(TAG, e.toString())
+                    callBacks.onFailure(e)
                 }
             })
     }
