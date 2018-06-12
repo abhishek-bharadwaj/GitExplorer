@@ -20,7 +20,7 @@ object Api {
     fun getPRs() = apiService.getPRs()
 
     interface ApiService {
-        @GET("repos/instacart/Snacks/pulls?state=open")
+        @GET("repos/instacart/Snacks/pulls?state=${State.ALL}")
         fun getPRs(): Single<List<PRData>>
     }
 }

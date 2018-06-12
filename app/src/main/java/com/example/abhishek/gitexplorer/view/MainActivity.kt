@@ -3,6 +3,7 @@ package com.example.abhishek.gitexplorer.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
 import com.bumptech.glide.Glide
 import com.example.abhishek.gitexplorer.R
 import com.example.abhishek.gitexplorer.data.DataCallBacks
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity(), DataCallBacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
         ll_progress_container.visible()
         Repository.getData(this)
     }
@@ -37,5 +39,10 @@ class MainActivity : AppCompatActivity(), DataCallBacks {
         Glide.with(this).load(repo.owner.avatarUrl).into(iv_repo_icon)
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = PRDataAdapter(this, prData)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main_activity, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
