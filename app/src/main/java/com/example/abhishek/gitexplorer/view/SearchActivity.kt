@@ -8,9 +8,9 @@ import android.view.View
 import android.widget.Toast
 import com.example.abhishek.gitexplorer.R
 import com.example.abhishek.gitexplorer.data.RepoData
-import com.example.abhishek.gitexplorer.interfaces.RepoResultCallback
 import com.example.abhishek.gitexplorer.data.Repository
 import com.example.abhishek.gitexplorer.gone
+import com.example.abhishek.gitexplorer.interfaces.RepoResultCallback
 import com.example.abhishek.gitexplorer.visible
 import kotlinx.android.synthetic.main.activity_search.*
 
@@ -37,7 +37,11 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, RepoResultCall
         cl_input_container.gone()
         ll_progress_container.gone()
         if (repoData.isEmpty()) {
-            Toast.makeText(this, "No public repos exist for this user.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this,
+                "No public repos exist for this user.\nPlease try again",
+                Toast.LENGTH_LONG).show()
+            cl_input_container.visible()
+            ll_progress_container.gone()
             return
         }
         Toast.makeText(this, "Found ${repoData.size} repos", Toast.LENGTH_LONG).show()

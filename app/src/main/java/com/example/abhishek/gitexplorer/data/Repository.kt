@@ -29,7 +29,7 @@ object Repository {
     }
 
     fun getRepos(ownerName: String, callBacks: RepoResultCallback) {
-        Api.getAllRepos().compose(Util.applyIOSchedulers())
+        Api.getAllRepos(ownerName).compose(Util.applyIOSchedulers())
             .subscribe(object : SingleObserver<List<RepoData>> {
                 override fun onSuccess(t: List<RepoData>) {
                     callBacks.onSuccess(t)

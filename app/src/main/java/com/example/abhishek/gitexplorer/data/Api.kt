@@ -6,6 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 object Api {
 
@@ -17,13 +18,13 @@ object Api {
             .create(ApiService::class.java)
     }
 
-    fun getAllRepos() = apiService.getAllRepos()
+    fun getAllRepos(ownerName: String) = apiService.getAllRepos(ownerName)
 
     fun getPRs() = apiService.getPRs()
 
     interface ApiService {
-        @GET("users/square/repos")
-        fun getAllRepos(): Single<List<RepoData>>
+        @GET("users/{owner}/repos")
+        fun getAllRepos(@Path("owner") ownerName: String): Single<List<RepoData>>
 
         @GET("repos/square/retrofit/pulls?state=${State.ALL}")
         fun getPRs(): Single<List<PRData>>
