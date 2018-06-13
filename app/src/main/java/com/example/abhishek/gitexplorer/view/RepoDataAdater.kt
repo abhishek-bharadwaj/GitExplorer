@@ -22,7 +22,8 @@ class RepoDataAdapter(private val context: Context, private val repoData: List<R
 
     override fun onBindViewHolder(holder: RepoDataVH, position: Int) {
         val repo = repoData[position]
-        holder.itemView.tv_repo_name.text = repo.fullName
+        holder.itemView.tv_repo_name.text = repo.name
+        holder.itemView.tv_language.text = repo.language
     }
 
     inner class RepoDataVH(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {

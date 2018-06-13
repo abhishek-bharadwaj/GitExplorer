@@ -15,9 +15,12 @@
             android:id="@+id/et_owner_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/grid_2"
+            android:layout_marginLeft="@dimen/grid_2"
+            android:layout_marginRight="@dimen/grid_2"
+            android:layout_marginTop="100dp"
             android:hint="Enter owner name"
-            app:layout_constraintBottom_toTopOf="@+id/btn_search"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
