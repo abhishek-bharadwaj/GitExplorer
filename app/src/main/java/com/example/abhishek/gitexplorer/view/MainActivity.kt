@@ -1,17 +1,21 @@
 package com.example.abhishek.gitexplorer.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.abhishek.gitexplorer.*
-import com.example.abhishek.gitexplorer.interfaces.PRResultCallback
 import com.example.abhishek.gitexplorer.data.PRData
 import com.example.abhishek.gitexplorer.data.Repository
 import com.example.abhishek.gitexplorer.data.State
+import com.example.abhishek.gitexplorer.interfaces.PRResultCallback
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback {
@@ -19,11 +23,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
     private var adapter: PRDataAdapter? = null
     private var prData: List<PRData>? = null
+    private var repoFullName: String? = null
+
+    companion object {
+        private const val ARG_REPO_NAME = "repo_full_name"
+        fun startActivity(context: Context, repoFullName: String) {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra(ARG_REPO_NAME, repoFullName)
+            context.startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        if (TextUtils.isEmpty(repoFullName)) {
+            Toast.makeText(this, "Something went wrong please retry!", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
         setSupportActionBar(toolbar)
         bottomSheetBehaviour = BottomSheetBehavior.from<LinearLayout>(ll_filters)
         bottomSheetBehaviour.peekHeight = resources.getDimensionPixelSize(R.dimen.button_height)
@@ -86,7 +104,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
         ll_progress_container.visible()
         rv.gone()
         ll_error.gone()
-        Repository.getPRs(this)
+        repoFullName?.let { Repository.getPRs(this, it) }
     }
 
     private fun setUpUI(prData: List<PRData>) {

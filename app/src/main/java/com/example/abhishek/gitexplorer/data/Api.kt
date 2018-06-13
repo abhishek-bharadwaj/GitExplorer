@@ -20,13 +20,13 @@ object Api {
 
     fun getAllRepos(ownerName: String) = apiService.getAllRepos(ownerName)
 
-    fun getPRs() = apiService.getPRs()
+    fun getPRs(repoFullName: String) = apiService.getPRs(repoFullName)
 
     interface ApiService {
         @GET("users/{owner}/repos")
         fun getAllRepos(@Path("owner") ownerName: String): Single<List<RepoData>>
 
-        @GET("repos/square/retrofit/pulls?state=${State.ALL}")
-        fun getPRs(): Single<List<PRData>>
+        @GET("repos/{repoFullName}/pulls?state=${State.ALL}")
+        fun getPRs(@Path("repoFullName") repoFullName: String): Single<List<PRData>>
     }
 }

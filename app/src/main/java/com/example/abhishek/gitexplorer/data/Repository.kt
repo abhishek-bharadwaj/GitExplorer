@@ -11,8 +11,8 @@ object Repository {
 
     const val TAG = "Repository"
 
-    fun getPRs(callBacks: PRResultCallback) {
-        Api.getPRs().compose(Util.applyIOSchedulers())
+    fun getPRs(callBacks: PRResultCallback, repoFullName: String) {
+        Api.getPRs(repoFullName).compose(Util.applyIOSchedulers())
             .subscribe(object : SingleObserver<List<PRData>> {
                 override fun onSuccess(t: List<PRData>) {
                     callBacks.onSuccess(t)
