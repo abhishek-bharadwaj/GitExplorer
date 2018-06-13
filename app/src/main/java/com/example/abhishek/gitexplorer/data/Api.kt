@@ -17,10 +17,15 @@ object Api {
             .create(ApiService::class.java)
     }
 
+    fun getAllRepos() = apiService.getAllRepos()
+
     fun getPRs() = apiService.getPRs()
 
     interface ApiService {
-        @GET("repos/instacart/Snacks/pulls?state=${State.ALL}")
+        @GET("users/square/repos")
+        fun getAllRepos(): Single<List<RepoData>>
+
+        @GET("repos/square/retrofit/pulls?state=${State.ALL}")
         fun getPRs(): Single<List<PRData>>
     }
 }

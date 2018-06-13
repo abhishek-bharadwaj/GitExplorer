@@ -10,4 +10,5 @@
     <string name="all">All</string>
     <string name="try_again">Try Again</string>
     <string name="something_went_wrong_please">Oops! Something went wrong please.</string>
+    <string name="finding_repositories">Finding repositories</string>
 </resources>

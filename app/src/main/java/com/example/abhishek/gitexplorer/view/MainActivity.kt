@@ -8,13 +8,13 @@ import android.view.View
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
 import com.example.abhishek.gitexplorer.*
-import com.example.abhishek.gitexplorer.data.DataCallBacks
+import com.example.abhishek.gitexplorer.interfaces.PRResultCallback
 import com.example.abhishek.gitexplorer.data.PRData
 import com.example.abhishek.gitexplorer.data.Repository
 import com.example.abhishek.gitexplorer.data.State
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
+class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback {
 
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
     private var adapter: PRDataAdapter? = null
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DataCallBacks {
         ll_progress_container.visible()
         rv.gone()
         ll_error.gone()
-        Repository.getData(this)
+        Repository.getPRs(this)
     }
 
     private fun setUpUI(prData: List<PRData>) {
