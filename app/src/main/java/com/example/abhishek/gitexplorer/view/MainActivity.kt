@@ -116,9 +116,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
             return
         }
         val repo = prData[0].head.repo
-        tv_repo_name.text = repo.name
-        Glide.with(this).load(repo.owner.avatarUrl)
-            .apply(RequestOptions.circleCropTransform()).into(iv_repo_icon)
+        tv_repo_name.text = repo?.name ?: getString(R.string.app_name)
+        repo?.owner?.avatarUrl?.let {
+            Glide.with(this).load(it)
+                .apply(RequestOptions.circleCropTransform()).into(iv_repo_icon)
+        }
         rv.layoutManager = LinearLayoutManager(this)
         adapter = PRDataAdapter(this, prData)
         rv.adapter = adapter

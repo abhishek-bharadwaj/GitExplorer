@@ -14,7 +14,7 @@ class PRData(@SerializedName("url") val url: String,
              @SerializedName("updated_at") val updatedAt: String)
 
 class Head(@SerializedName("user") val user: User,
-           @SerializedName("repo") val repo: Repo)
+           @SerializedName("repo") val repo: Repo?)
 
 class User(@SerializedName("login") val login: String,
            @SerializedName("id") val id: Long,
