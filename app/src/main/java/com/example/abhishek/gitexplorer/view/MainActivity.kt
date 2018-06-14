@@ -23,11 +23,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
 
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
     private var adapter: PRDataAdapter? = null
-    private var prData: List<PRData>? = null
+    private var prData: ArrayList<PRData>? = null
     private var repoFullName: String? = null
 
     companion object {
         private const val ARG_REPO_NAME = "repo_full_name"
+        private const val KEY_PR_DATA = "pr_data"
+
         fun startActivity(context: Context, repoFullName: String) {
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra(ARG_REPO_NAME, repoFullName)
@@ -55,21 +57,37 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
         tv_close.setOnClickListener(this)
         btn_try_again.setOnClickListener(this)
 
-        requestData()
+        prData = savedInstanceState?.getParcelableArrayList(KEY_PR_DATA)
+        if (prData == null) requestData()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putParcelableArrayList(KEY_PR_DATA, prData)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        prData = savedInstanceState?.getParcelableArrayList<PRData>(KEY_PR_DATA)
+        prData?.let { setUpSuccessUI(prData as ArrayList<PRData>) }
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun onSuccess(prData: List<PRData>) {
-        ll_progress_container.gone()
-        ll_error.gone()
-        rv.visible()
-        this.prData = prData
-        setUpUI(prData)
-        ll_filters.visible()
-        tv_label.text = getString(R.string.showing_pull_requests, State.ALL)
+        this.prData = prData as ArrayList<PRData>
+        setUpSuccessUI(prData)
     }
 
     override fun onFailure(e: Throwable) {
         showErrorUI()
+    }
+
+    private fun setUpSuccessUI(prData: List<PRData>) {
+        ll_progress_container.gone()
+        ll_error.gone()
+        rv.visible()
+        prData.let { setUpUI(it) }
+        ll_filters.visible()
+        tv_label.text = getString(R.string.showing_pull_requests, State.ALL)
     }
 
     override fun onClick(v: View?) {
@@ -110,6 +128,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
     }
 
     private fun setUpUI(prData: List<PRData>) {
+        if (isFinishing) return
         if (prData.isEmpty()) {
             Toast.makeText(this, "No pull requests found!", Toast.LENGTH_LONG).show()
             finish()
