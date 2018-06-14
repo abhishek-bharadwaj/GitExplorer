@@ -2,8 +2,10 @@ package com.example.abhishek.gitexplorer.data
 
 import android.util.Log
 import com.example.abhishek.gitexplorer.Util
-import com.example.abhishek.gitexplorer.interfaces.PRResultCallback
-import com.example.abhishek.gitexplorer.interfaces.RepoResultCallback
+import com.example.abhishek.gitexplorer.data.interfaces.PRResultCallback
+import com.example.abhishek.gitexplorer.data.interfaces.RepoResultCallback
+import com.example.abhishek.gitexplorer.data.model.PRData
+import com.example.abhishek.gitexplorer.data.model.RepoData
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 

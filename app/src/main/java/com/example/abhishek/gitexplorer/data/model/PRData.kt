@@ -1,4 +1,4 @@
-package com.example.abhishek.gitexplorer.data
+package com.example.abhishek.gitexplorer.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -45,7 +45,8 @@ class PRData(@SerializedName("url") val url: String,
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<PRData> = object : Parcelable.Creator<PRData> {
-            override fun createFromParcel(source: Parcel): PRData = PRData(source)
+            override fun createFromParcel(source: Parcel): PRData =
+                PRData(source)
             override fun newArray(size: Int): Array<PRData?> = arrayOfNulls(size)
         }
     }
@@ -68,7 +69,8 @@ class Head(@SerializedName("user") val user: User,
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Head> = object : Parcelable.Creator<Head> {
-            override fun createFromParcel(source: Parcel): Head = Head(source)
+            override fun createFromParcel(source: Parcel): Head =
+                Head(source)
             override fun newArray(size: Int): Array<Head?> = arrayOfNulls(size)
         }
     }
@@ -100,7 +102,8 @@ class User(@SerializedName("login") val login: String,
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<User> = object : Parcelable.Creator<User> {
-            override fun createFromParcel(source: Parcel): User = User(source)
+            override fun createFromParcel(source: Parcel): User =
+                User(source)
             override fun newArray(size: Int): Array<User?> = arrayOfNulls(size)
         }
     }
@@ -132,7 +135,8 @@ class Repo(@SerializedName("id") val id: Long,
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Repo> = object : Parcelable.Creator<Repo> {
-            override fun createFromParcel(source: Parcel): Repo = Repo(source)
+            override fun createFromParcel(source: Parcel): Repo =
+                Repo(source)
             override fun newArray(size: Int): Array<Repo?> = arrayOfNulls(size)
         }
     }
@@ -161,7 +165,8 @@ class Owner(@SerializedName("id") val id: Long,
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Owner> = object : Parcelable.Creator<Owner> {
-            override fun createFromParcel(source: Parcel): Owner = Owner(source)
+            override fun createFromParcel(source: Parcel): Owner =
+                Owner(source)
             override fun newArray(size: Int): Array<Owner?> = arrayOfNulls(size)
         }
     }

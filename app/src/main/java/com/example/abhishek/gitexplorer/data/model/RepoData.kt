@@ -1,4 +1,4 @@
-package com.example.abhishek.gitexplorer.data
+package com.example.abhishek.gitexplorer.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -24,7 +24,8 @@ class RepoData(@SerializedName("full_name") val fullName: String,
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<RepoData> = object : Parcelable.Creator<RepoData> {
-            override fun createFromParcel(source: Parcel): RepoData = RepoData(source)
+            override fun createFromParcel(source: Parcel): RepoData =
+                RepoData(source)
             override fun newArray(size: Int): Array<RepoData?> = arrayOfNulls(size)
         }
     }

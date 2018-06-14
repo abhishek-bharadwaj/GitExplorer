@@ -1,4 +1,4 @@
-package com.example.abhishek.gitexplorer.view
+package com.example.abhishek.gitexplorer.view.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.abhishek.gitexplorer.R
-import com.example.abhishek.gitexplorer.data.RepoData
+import com.example.abhishek.gitexplorer.data.model.RepoData
+import com.example.abhishek.gitexplorer.view.activity.PRViewActivity
 import kotlinx.android.synthetic.main.layout_repo_data_item.view.*
 
 class RepoDataAdapter(private val context: Context, private val repoData: List<RepoData>) :

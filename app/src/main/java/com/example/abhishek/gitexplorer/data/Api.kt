@@ -1,5 +1,8 @@
 package com.example.abhishek.gitexplorer.data
 
+import com.example.abhishek.gitexplorer.data.model.PRData
+import com.example.abhishek.gitexplorer.data.model.RepoData
+import com.example.abhishek.gitexplorer.data.model.State
 import com.google.gson.GsonBuilder
 import io.reactivex.Single
 import okhttp3.OkHttpClient

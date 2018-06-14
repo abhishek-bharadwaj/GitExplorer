@@ -1,4 +1,4 @@
-package com.example.abhishek.gitexplorer.view
+package com.example.abhishek.gitexplorer.view.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,10 +9,11 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.example.abhishek.gitexplorer.R
 import com.example.abhishek.gitexplorer.Util
-import com.example.abhishek.gitexplorer.data.RepoData
+import com.example.abhishek.gitexplorer.data.model.RepoData
 import com.example.abhishek.gitexplorer.data.Repository
 import com.example.abhishek.gitexplorer.gone
-import com.example.abhishek.gitexplorer.interfaces.RepoResultCallback
+import com.example.abhishek.gitexplorer.data.interfaces.RepoResultCallback
+import com.example.abhishek.gitexplorer.view.adapter.RepoDataAdapter
 import com.example.abhishek.gitexplorer.visible
 import kotlinx.android.synthetic.main.activity_search.*
 
@@ -95,7 +96,8 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, RepoResultCall
         repoData?.let {
             rv_repo.visible()
             rv_repo.layoutManager = LinearLayoutManager(this)
-            rv_repo.adapter = RepoDataAdapter(this, it)
+            rv_repo.adapter =
+                    RepoDataAdapter(this, it)
         }
     }
 }

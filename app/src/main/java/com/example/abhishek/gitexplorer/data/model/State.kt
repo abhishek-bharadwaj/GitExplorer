@@ -1,4 +1,4 @@
-package com.example.abhishek.gitexplorer.data
+package com.example.abhishek.gitexplorer.data.model
 
 import android.support.annotation.StringDef
 

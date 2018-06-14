@@ -1,4 +1,4 @@
-package com.example.abhishek.gitexplorer.view
+package com.example.abhishek.gitexplorer.view.activity
 
 import android.content.Context
 import android.content.Intent
@@ -15,10 +15,11 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.abhishek.gitexplorer.*
-import com.example.abhishek.gitexplorer.data.PRData
+import com.example.abhishek.gitexplorer.data.model.PRData
 import com.example.abhishek.gitexplorer.data.Repository
-import com.example.abhishek.gitexplorer.data.State
-import com.example.abhishek.gitexplorer.interfaces.PRResultCallback
+import com.example.abhishek.gitexplorer.data.model.State
+import com.example.abhishek.gitexplorer.data.interfaces.PRResultCallback
+import com.example.abhishek.gitexplorer.view.adapter.PRDataAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class PRViewActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback {

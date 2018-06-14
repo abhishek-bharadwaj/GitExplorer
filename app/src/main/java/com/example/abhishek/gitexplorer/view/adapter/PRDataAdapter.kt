@@ -1,4 +1,4 @@
-package com.example.abhishek.gitexplorer.view
+package com.example.abhishek.gitexplorer.view.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.abhishek.gitexplorer.R
 import com.example.abhishek.gitexplorer.Util
-import com.example.abhishek.gitexplorer.data.PRData
-import com.example.abhishek.gitexplorer.data.State
+import com.example.abhishek.gitexplorer.data.model.PRData
+import com.example.abhishek.gitexplorer.data.model.State
 import kotlinx.android.synthetic.main.layout_pr_data_item.view.*
 
 

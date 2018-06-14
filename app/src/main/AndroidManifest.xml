@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.PRViewActivity"
+            android:name=".view.activity.PRViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".view.SearchActivity">
+        <activity android:name=".view.activity.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
