@@ -21,7 +21,7 @@ import com.example.abhishek.gitexplorer.data.State
 import com.example.abhishek.gitexplorer.interfaces.PRResultCallback
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback {
+class PRViewActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback {
 
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
     private var adapter: PRDataAdapter? = null
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
         private const val KEY_PR_DATA = "pr_data"
 
         fun startActivity(context: Context, repoFullName: String) {
-            val intent = Intent(context, MainActivity::class.java)
+            val intent = Intent(context, PRViewActivity::class.java)
             intent.putExtra(ARG_REPO_NAME, repoFullName)
             context.startActivity(intent)
         }
@@ -52,6 +52,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
             finish()
             return
         }
+        if (!Util.isNetworkAvailable(this)) {
+            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_LONG)
+                .show()
+            return
+        }
+
         setSupportActionBar(toolbar)
         bottomSheetBehaviour = BottomSheetBehavior.from<LinearLayout>(ll_filters)
         bottomSheetBehaviour.peekHeight = resources.getDimensionPixelSize(R.dimen.button_height)

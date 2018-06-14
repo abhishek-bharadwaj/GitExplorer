@@ -1,11 +1,14 @@
 package com.example.abhishek.gitexplorer
 
+import android.content.Context
+import android.net.ConnectivityManager
 import io.reactivex.Single
 import io.reactivex.SingleTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 object Util {
 
@@ -22,5 +25,12 @@ object Util {
     fun getDateDisplayString(dateString: String): String? {
         val date = apiDateFormat.parse(dateString)
         return displayFormat.format(date)
+    }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = connectivityManager.activeNetworkInfo
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting
     }
 }

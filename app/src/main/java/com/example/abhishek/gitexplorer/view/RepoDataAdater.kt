@@ -35,7 +35,7 @@ class RepoDataAdapter(private val context: Context, private val repoData: List<R
 
         override fun onClick(v: View?) {
             val repoFullName = (v?.tag ?: return) as? String ?: return
-            MainActivity.startActivity(context, repoFullName)
+            PRViewActivity.startActivity(context, repoFullName)
         }
     }
 }

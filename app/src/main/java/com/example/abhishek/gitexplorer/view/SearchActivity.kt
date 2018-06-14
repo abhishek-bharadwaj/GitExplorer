@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.example.abhishek.gitexplorer.R
+import com.example.abhishek.gitexplorer.Util
 import com.example.abhishek.gitexplorer.data.RepoData
 import com.example.abhishek.gitexplorer.data.Repository
 import com.example.abhishek.gitexplorer.gone
@@ -49,6 +50,11 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, RepoResultCall
     }
 
     override fun onClick(v: View?) {
+        if (!Util.isNetworkAvailable(this)) {
+            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_LONG)
+                .show()
+            return
+        }
         validateAndRequestData()
     }
 
