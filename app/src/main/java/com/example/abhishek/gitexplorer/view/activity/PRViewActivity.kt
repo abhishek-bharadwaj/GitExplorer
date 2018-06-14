@@ -15,16 +15,18 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.abhishek.gitexplorer.*
-import com.example.abhishek.gitexplorer.data.model.PRData
-import com.example.abhishek.gitexplorer.data.Repository
-import com.example.abhishek.gitexplorer.data.model.State
+import com.example.abhishek.gitexplorer.data.PRDataRepository
 import com.example.abhishek.gitexplorer.data.interfaces.PRResultCallback
+import com.example.abhishek.gitexplorer.data.model.PRData
+import com.example.abhishek.gitexplorer.data.model.State
 import com.example.abhishek.gitexplorer.view.adapter.PRDataAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class PRViewActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback {
 
     private lateinit var bottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
+
+    private val repository = PRDataRepository()
     private var adapter: PRDataAdapter? = null
     private var prData: ArrayList<PRData>? = null
     private var repoFullName: String? = null
@@ -72,6 +74,11 @@ class PRViewActivity : AppCompatActivity(), View.OnClickListener, PRResultCallba
 
         prData = savedInstanceState?.getParcelableArrayList(KEY_PR_DATA)
         if (prData == null) requestData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        repository.disposeSubscription()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -137,7 +144,7 @@ class PRViewActivity : AppCompatActivity(), View.OnClickListener, PRResultCallba
         ll_progress_container.visible()
         rv.gone()
         ll_error.gone()
-        repoFullName?.let { Repository.getPRs(this, it) }
+        repoFullName?.let { repository.getPRs(this, it) }
     }
 
     private fun setUpUI(prData: List<PRData>) {
