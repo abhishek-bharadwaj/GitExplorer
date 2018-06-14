@@ -2,8 +2,10 @@ package com.example.abhishek.gitexplorer.view
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
@@ -40,6 +42,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+        }
+
         repoFullName = intent.extras.getString(ARG_REPO_NAME)
         if (TextUtils.isEmpty(repoFullName)) {
             Toast.makeText(this, "Something went wrong please retry!", Toast.LENGTH_LONG).show()
