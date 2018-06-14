@@ -24,6 +24,7 @@ class RepoDataAdapter(private val context: Context, private val repoData: List<R
         val repo = repoData[position]
         holder.itemView.tv_repo_name.text = repo.name
         holder.itemView.tv_language.text = repo.language
+        holder.itemView.tag = repo.fullName
     }
 
     inner class RepoDataVH(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
@@ -33,7 +34,8 @@ class RepoDataAdapter(private val context: Context, private val repoData: List<R
         }
 
         override fun onClick(v: View?) {
-
+            val repoFullName = (v?.tag ?: return) as? String ?: return
+            MainActivity.startActivity(context, repoFullName)
         }
     }
 }

@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.abhishek.gitexplorer.*
 import com.example.abhishek.gitexplorer.data.PRData
 import com.example.abhishek.gitexplorer.data.Repository
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        repoFullName = intent.extras.getString(ARG_REPO_NAME)
         if (TextUtils.isEmpty(repoFullName)) {
             Toast.makeText(this, "Something went wrong please retry!", Toast.LENGTH_LONG).show()
             finish()
@@ -108,9 +110,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, PRResultCallback
     }
 
     private fun setUpUI(prData: List<PRData>) {
+        if (prData.isEmpty()) {
+            Toast.makeText(this, "No pull requests found!", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
         val repo = prData[0].head.repo
         tv_repo_name.text = repo.name
-        Glide.with(this).load(repo.owner.avatarUrl).into(iv_repo_icon)
+        Glide.with(this).load(repo.owner.avatarUrl)
+            .apply(RequestOptions.circleCropTransform()).into(iv_repo_icon)
         rv.layoutManager = LinearLayoutManager(this)
         adapter = PRDataAdapter(this, prData)
         rv.adapter = adapter
